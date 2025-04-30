@@ -5,7 +5,6 @@ It can be used to compare the following three regression models:
     - Support Vector Regression (svr)
     - Gaussian Process Regression (gpr)
 
-Author: Dominic Roy-Stang
 """
 
 import sys
@@ -324,13 +323,13 @@ def main(args):
 
     # Load the provided personal finance dataset
 
-    if len(args) is 1:
-        # Default to preformatted.csv if no file is provided as an argument
+    if len(args) == 1:
+        # Default to preformatted.csv if no file == provided as an argument
         project_root = Path(__file__).resolve().parent.parent
         default_location = project_root/"datasets/preformatted.csv"
         results = process_files([default_location])
 
-    elif len(args) is 2:
+    elif len(args) == 2:
         location = Path(args[1])
         if location.is_file():
             results = process_files([location])

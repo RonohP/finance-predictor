@@ -26,9 +26,9 @@ class BayesianLasso(BaseEstimator, RegressorMixin):
 
     def lasso_model(self, X, y):
 
-        if self.feature_map is None:
+        if self.feature_map == None:
             self.feature_map = {i: i for i in range(X.shape[1])}
-        if self.feature_weights is None:
+        if self.feature_weights == None:
             self.feature_weights = {i: 1.0 for i in range(X.shape[1])}
 
         # Priors for unknown model parameters
@@ -52,7 +52,7 @@ class BayesianLasso(BaseEstimator, RegressorMixin):
         if self.use_mcmc:
             self.mcmc = pymc.MCMC(self.lasso_model(X, y))
             self.mcmc.sample(self.mcmc_trials, self.mcmc_burn, 2)
-            if self.feature_map is not None:
+            if self.feature_map == not None:
                 self.num_betas = max(self.feature_map.values()) + 1
             else:
                 self.num_betas = X.shape[1]
@@ -68,7 +68,7 @@ class BayesianLasso(BaseEstimator, RegressorMixin):
             self.coef_ = np.array([beta.value for beta in self._map.betas])
 
     def confidence_intervals(self, confidence=95.):
-        if self.mcmc is None:
+        if self.mcmc == None:
             raise ValueError('Need to fit the mcmc first')
 
         traces = []

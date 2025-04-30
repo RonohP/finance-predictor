@@ -16,7 +16,7 @@ def determine_format(csv_file):
     # Get list of supported csv formats
     formats_file = Path(__file__).resolve().parent/'csv_formats.yaml'
     with open(formats_file) as formats:
-        csv_formats = yaml.load(formats)
+        csv_formats = yaml.load(formats, Loader=yaml.SafeLoader)
 
     # The first row of a csv contains the labels which are used to determine the format
     delimiters = [',', ';']
@@ -54,13 +54,13 @@ def csv_to_formatted_dataframe(csv_file):
         raise
 
     # Handle the format
-    if csv_format is 'preformatted':
+    if csv_format == 'preformatted':
         return handle_preformatted(csv_file)
-    elif csv_format is 'indexed_preformatted':
+    elif csv_format == 'indexed_preformatted':
         return handle_indexed_preformatted(csv_file)
-    elif csv_format is 'mint':
+    elif csv_format == 'mint':
         return handle_mint(csv_file)
-    elif csv_format is 'czech':
+    elif csv_format == 'czech':
         return handle_czech(csv_file)
     else:
         raise Exception('CSV format unrecognized!')
@@ -80,7 +80,7 @@ def split_aggregate_csv(csv_file):
         raise
 
     # Handle the format
-    if csv_format is 'czech':
+    if csv_format == 'czech':
         print(split_czech(csv_file))
     else:
         raise Exception('CSV format unrecognized!')
