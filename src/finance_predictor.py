@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 
-import numpy
+import numpy 
 import pandas
 from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.gaussian_process import GaussianProcessRegressor
